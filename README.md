@@ -1,89 +1,23 @@
-# Sudoku Solver
+Sudoku Solver Game
 
-## Title Page
-(Sudoku Solver Project)
+Title Page
 
-## Introduction
-This is a Python-based Sudoku Solver that allows users to either enter their own Sudoku puzzle or use a pre-defined sample puzzle for practice. The program then solves the puzzle using the **Backtracking Algorithm**.
+Sudoku Solver Game
 
-## Methodology
-1. The user is prompted to either enter their own Sudoku puzzle or use a default one.
-2. The Sudoku board is processed using the **Backtracking Algorithm**.
-3. The algorithm attempts to place numbers in empty cells while checking constraints.
-4. If a valid solution is found, the solved board is displayed.
-5. If no solution exists, the user is informed.
+Introduction
 
-## Code Typed
-```python
-def is_valid(board, row, col, num):
-    """Check if 'num' can be placed at board[row][col]."""
-    
-    # Check row and column
-    for i in range(9):
-        if board[row][i] == num or board[i][col] == num:
-            return False
-    
-    # Check 3x3 grid
-    box_x, box_y = (row // 3) * 3, (col // 3) * 3
-    for i in range(3):
-        for j in range(3):
-            if board[box_x + i][box_y + j] == num:
-                return False
-    
-    return True
+The Sudoku Solver is a Python-based program designed to solve Sudoku puzzles efficiently. It allows users to either enter their own Sudoku puzzle or use a predefined puzzle for practice. The program then uses an intelligent algorithm to solve the puzzle step by step.
 
-def solve_sudoku(board):
-    """Solve Sudoku using backtracking."""
-    
-    for row in range(9):
-        for col in range(9):
-            if board[row][col] == 0:  # Find empty cell
-                for num in range(1, 10):  # Try numbers 1-9
-                    if is_valid(board, row, col, num):
-                        board[row][col] = num
-                        if solve_sudoku(board):
-                            return True
-                        board[row][col] = 0  # Backtrack
-                return False  # No valid number found
-    
-    return True
+Methodology
 
-def print_board(board):
-    """Print the Sudoku board."""
-    for row in board:
-        print(" ".join(map(str, row)))
+1.The program welcomes the user and asks if they want to enter their own Sudoku puzzle or use a default one.
 
-# Welcome message
-print("\nWelcome to Sudoku Solver!\n")
+2.If the user chooses to enter their own puzzle, they input the 9x9 Sudoku grid with 0s representing empty cells.
 
-# User input or default Sudoku
-choice = input("Enter your own Sudoku? (Yes/No): ").strip().lower()
+3.If the user chooses not to enter a puzzle, a default Sudoku puzzle is provided.
 
-if choice == 'yes':
-    print("Enter 9 rows (use 0 for empty cells):")
-    sudoku_board = [list(map(int, input().split())) for _ in range(9)]
-else:
-    sudoku_board = [
-        [5, 3, 0, 0, 7, 0, 0, 0, 0],
-        [6, 0, 0, 1, 9, 5, 0, 0, 0],
-        [0, 9, 8, 0, 0, 0, 0, 6, 0],
-        [8, 0, 0, 0, 6, 0, 0, 0, 3],
-        [4, 0, 0, 8, 0, 3, 0, 0, 1],
-        [7, 0, 0, 0, 2, 0, 0, 0, 6],
-        [0, 6, 0, 0, 0, 0, 2, 8, 0],
-        [0, 0, 0, 4, 1, 9, 0, 0, 5],
-        [0, 0, 0, 0, 8, 0, 0, 7, 9]
-    ]
-    print("Using default Sudoku for practice.")
+4.The program uses the Backtracking Algorithm to solve the Sudoku puzzle.
 
-# Solve and print result
-if solve_sudoku(sudoku_board):
-    print("\nSolved Sudoku:")
-    print_board(sudoku_board)
-    print("\nThanks for using Sudoku Solver!\n")
-else:
-    print("No solution exists.")
-```
+5.Once solved, the completed Sudoku grid is displayed to the user.
 
-
-
+6.A thank-you message is shown at the end of the execution.
